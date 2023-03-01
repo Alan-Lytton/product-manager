@@ -1,12 +1,20 @@
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/js/bootstrap.bundle.min"
-import Form from "./components/Form";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import Main from "./view/Main";
+import ProductDetails from "./components/ProductDetails";
 
 function App() {
   return (
     <div className="App">
-    <Form/>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<Main/>} path="/product"/>
+            <Route element={<ProductDetails/>} path="/product/:id"/>
+        </Routes>
+      </BrowserRouter>
+
     </div>
   );
 }

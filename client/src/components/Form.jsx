@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import axios from "axios";
 
-const Form = () => {
+const Form = (props) => {
+    const {products,setProducts} = props;
     const [title,setTitle] = useState("");
     const [price,setPrice] = useState("");
     const [description,setDescription] = useState("");
@@ -13,8 +14,12 @@ const Form = () => {
             price,
             description
         })
+            .then(response =>{
+                setProducts([...products,response.data])
+            })
+            .catch(err=>console.log(err))
         setTitle("")
-        setPrice(0.00)
+        setPrice("")
         setDescription("")
 
     }
@@ -32,7 +37,7 @@ const Form = () => {
                 </div>
                 <div>
                     <label>Description: </label>
-                    <textarea onChange={(e)=>setDescription(e.target.value)}>{description}</textarea>
+                    <textarea onChange={(e)=>setDescription(e.target.value)}></textarea>
                 </div>
                 <span>
                     <input type="submit" value="Add Product"/>
